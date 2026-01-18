@@ -13,67 +13,58 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<section class="hero">
-    <div class="hero__container">
-        <div class="hero__content">
-            <div class="hero__text">
-                <div class="hero__slides-container">
-                    <?php foreach ($arResult['ITEMS'] as $index => $arItem): ?>
+<section class="licenses">
+    <div class="licenses__container">
+        <p class="licenses__title">Лицензии</p>
 
-                        <?php /* код, который позволяет редактировать и удалять статьи */
-                        $this->AddEditAction(
-                            $arItem['ID'],
-                            $arItem['EDIT_LINK'],
-                            CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT")
-                        );
-                        $this->AddDeleteAction(
-                            $arItem['ID'],
-                            $arItem['DELETE_LINK'],
-                            CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"),
-                            array(
-                                "CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')
-                            )
-                        );
-                        ?>
+        <div class="licenses__grid">
+            <?php foreach ($arResult['ITEMS'] as $arItem): ?>
+                <?php
+                $this->AddEditAction(
+                    $arItem['ID'],
+                    $arItem['EDIT_LINK'],
+                    CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT")
+                );
+                $this->AddDeleteAction(
+                    $arItem['ID'],
+                    $arItem['DELETE_LINK'],
+                    CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"),
+                    array(
+                        "CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')
+                    )
+                );
+                ?>
+                <div class="license-card" id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
+                    <div class="license-card__image">
+                        <img src="<?= $arItem['PREVIEW_PICTURE']['SRC']; ?>" alt="<?= $arItem['PREVIEW_PICTURE']['ALT']; ?>">
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
-                        <div class="hero__slide <?= $index === 0 ? 'hero__slide--active' : '' ?>"
-                             data-slide="<?= $index ?>"
-                             id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
-                            <p class="hero__title"><?= $arItem['NAME']; ?></p>
-                            <p class="hero__subtitle"><?= $arItem['PREVIEW_TEXT']; ?></p>
+        <div class="licenses__slider splide">
+            <div class="splide__track">
+                <div class="splide__list">
+                    <?php foreach ($arResult['ITEMS'] as $arItem): ?>
+                        <div class="license-card splide__slide">
+                            <div class="license-card__image">
+                                <img src="<?= $arItem['PREVIEW_PICTURE']['SRC']; ?>" alt="<?= $arItem['PREVIEW_PICTURE']['ALT']; ?>">
+                            </div>
                         </div>
-
                     <?php endforeach; ?>
                 </div>
             </div>
-
-            <!-- Блок с кнопками вынесен из hero__text -->
-            <div class="hero__buttons">
-                <button class="hero__button">Записаться на приём</button>
-
-                <div class="hero__carousel">
-                    <button class="hero__carousel-arrow hero__carousel-arrow--left">
-                        <img src="<?php echo SITE_TEMPLATE_PATH ?>/img/icon/arrow.left-card.svg" alt="Предыдущий слайд">
-                    </button>
-                    <div class="hero__carousel-dots">
-                        <?php foreach ($arResult['ITEMS'] as $index => $arItem): ?>
-                            <button class="hero__carousel-dot <?= $index === 0 ? 'hero__carousel-dot--active' : '' ?>"
-                                    data-slide="<?= $index ?>"></button>
-                        <?php endforeach; ?>
-                    </div>
-                    <button class="hero__carousel-arrow hero__carousel-arrow--right">
-                        <img src="<?php echo SITE_TEMPLATE_PATH ?>/img/icon/arrow.right-card.svg" alt="Следующий слайд">
-                    </button>
-                </div>
+            <div class="my-carousel-progress">
+                <div class="my-carousel-progress-bar"></div>
             </div>
-
-            <?php foreach ($arResult['ITEMS'] as $index => $arItem): ?>
-                <img src="<?= $arItem['PREVIEW_PICTURE']['SRC']; ?>"
-                     alt="<?= $arItem['PREVIEW_PICTURE']['ALT']; ?>"
-                     class="hero__slide-img <?= $index === 0 ? 'hero__slide-img--active' : '' ?>"
-                     data-slide="<?= $index ?>">
-            <?php endforeach; ?>
-
         </div>
     </div>
 </section>
+<style>
+    .licenses__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 273px);
+        justify-content: center;
+        gap: 24px;
+    }
+</style>

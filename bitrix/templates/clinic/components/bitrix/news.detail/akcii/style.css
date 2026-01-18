@@ -1,13 +1,8 @@
-div.news-detail
-{
-	word-wrap: break-word;
-}
-div.news-detail img.detail_picture
-{
-	float:left;
-	margin:0 8px 6px 1px;
-}
-.news-date-time
-{
-	color:#486DAA;
+.doctors__title {
+	font-size: 40px;
+	text-align: left;
+	font-weight: 600;
+	color: var(--color-text);
+	margin-bottom: 30px;
+	grid-column: 2;
 }

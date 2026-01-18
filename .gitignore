@@ -1,37 +1,108 @@
-/upload/*
-/bitrix/*
-/cgi-bin
-/.well-known
+# Исключаем настройки PHPStorm
+/.idea
 
-/exchange/*
-/30_let/*
-/robots.txt
-/urlrewrite.php
-
-/nbproject
-
-/sitemap_*.xml
-/yandex_*.html
-/mailru-*.html
-/google*.html
-/*.html
-/*.txt
-/*.xml
-*.log
-*.local.php
-*.csv
-
-/mavt.ru_20190301_083828_nopub_5eb0452e.tar
-/mavt.ru_20190301_083828_nopub_5eb0452e.tar.1
-/mavt.ru_20190301_083828_nopub_5eb0452e.tar.2
-/mavt.ru_20190305_082757_core_b6f5404f.tar
+# сервисные скрипты битрикса
 /restore.php
+/bitrix_server_test.php
 
-/bitrix
-/exchange
-/upload
-/local/templates/mavt/vendors/
-/local/php_interface/classes/lib/phpqrcode/cache/
+# Исключаем папку /bitrix кроме некоторых подпапок
+!/bitrix
+/bitrix/*
 
-# publics content
-/company/lease/regions/
+# оставляем печатные формы интернет-магазина
+!/bitrix/admin/
+/bitrix/admin/*
+!/bitrix/admin/reports/
+
+# оставляем нестандартные компоненты
+!/bitrix/components/
+/bitrix/components/aspro/
+/bitrix/components/centino/
+/bitrix/components/bitrix/
+
+# оставляем модули aspro, centino, так как в них могут быть кастомные классы и обработчики
+!/bitrix/modules/
+/bitrix/modules/*
+!bitrix/modules/aspro.*/
+!bitrix/modules/centino.*/
+
+# сохраняем весь php_interface за редкими исключениями
+!/bitrix/php_interface/
+/bitrix/php_interface/dbconn.ph*
+/bitrix/php_interface/after_connect*
+/bitrix/php_interface/logs/
+
+# сохраняем шаблоны сайта
+!/bitrix/templates/
+
+# исключаем загружаемые файлы
+/upload/
+
+# исключаем десктопное приложение
+/desktop_app/
+
+# исключаем резервную копию сайта и скрипты после миграции
+/backup_site*/
+/migratsiya-hit/
+
+# исключаем регионы
+/*_regions/
+
+# различные системные папки и файлы хостингов и операционных систем
+/cgi-bin/
+/awstats/
+/webstat/
+.DS_Store
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+
+# текстовые и подобные файлы
+*.xml
+*.txt
+*.log
+*.css.map
+*.csv
+google*.html
+yandex_*.html
+yandex_*.txt
+sitemap_*.php
+sitemap-*.php
+
+# архивы, включая многотомные
+*.zip
+*.zip*
+*.tar
+*.tar*
+*.enc
+*.enc*
+*.gz
+*.gz*
+*.tgz
+*.tgz*
+*.sql
+*.rar
+.hg
+.ftpconfig
+*.doc
+*.docx
+*.pdf
+*.rtf
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.psd
+*.psb
+*.sketch
+core.*
+
+# бэкапы
+
+*.back*
+
+# прочее
+/readme.html
+/hss_files/
+/i/
